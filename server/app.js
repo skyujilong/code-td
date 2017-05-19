@@ -8,4 +8,6 @@ app.use(logger())
     .use(router.routes())
     .use(router.allowedMethods());
 
-app.listen(3000);
+app.listen(3000,()=>{
+    console.log('server start on: http://localhost:3000');
+});
