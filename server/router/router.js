@@ -2,9 +2,10 @@
 const router = require('koa-router')();
 const req = require('../util/req.js');
 const cheerio = require('cheerio');
-const _ = require('lodash')
-//正则标签匹配
-const tagReg = /<(?:\/([^>]+)>)|<(?:([^\s\/>]*)\s*((?:(?:"[^"]*")|(?:'[^']*')|[^"'<>\/])*)\/?>)/g;
+const _ = require('lodash');
+const dbHandler = require('../db/db.js');
+const Area = require('../module/area.js');
+const co = require('co');
 
 router.get('/', function*(next) {
     this.body = 'hello world';
@@ -52,27 +53,47 @@ router.get('/analysisProxy', function*(next) {
     yield next;
 });
 
-router.get('/analysisChengDu',function*(next){
+router.get('/analysisChengDu', function*(next) {
+    let objectId = new dbHandler.ObjectID('591e839bbbbd6bf59b14401b');
     let url = 'https://chengdu.anjuke.com/community/shuangliu/';
     let content = yield req(url);
     let $ = cheerio.load(content[1], {
         decodeEntities: false
     });
+    let list = [];
+    let db = yield dbHandler.getDb();
     // console.log($('body .li-itemmod'));
-    $('body .li-itemmod').each(function(){
-        console.log(_.trim($(this).find('address').text()));
-        console.log(_.trim(
-            $(this).find('.li-side').find('strong').text()
-        ));
-        console.log(
-            _.trim(
-                $(this).find('.price-txt').text()
-            )
-        );
+    $('body .li-itemmod').each(function() {
+        let area = new Area();
+        area = _.merge(area, {
+            cityId: objectId,
+            name: _.trim($(this).find('.li-info h3 a').text()),
+            addr: _.trim($(this).find('address').text()),
+            priceInfo: [{
+                price: $(this).find('.li-side').find('strong').text(),
+                time: new Date().getTime(),
+                upDownRate: $(this).find('.price-txt').text()
+            }]
+        });
+        list.push(area);
     });
+    // yield Promise.all(list);
+    for (let area of list) {
+        let info = yield db.collection('area')
+            .findOneAndUpdate({
+                name: area.name
+            }, {
+                $push: {
+                    priceInfo: {
+                        $each: area.priceInfo
+                    }
+                }
+            }, {
+                upsert: true
+            });
+    }
 
-    // let $current = $('body .li-itemmod');
-
+    db.close();
     this.body = $('body .li-itemmod').html();
     yield next;
 });
