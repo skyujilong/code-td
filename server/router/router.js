@@ -94,7 +94,7 @@ router.get('/analysisChengDu', function*(next) {
     }
 
     db.close();
-    this.body = $('body .li-itemmod').html();
+    this.body = 'get chengdu data end;';
     yield next;
 });
 
