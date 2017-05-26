@@ -10,7 +10,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, '..', 'pages', 'js', 'page'),
         filename: "js/[name].js",
         //当有H5 history api的时候启用该方法。
-        historyApiFallback: false,
+        historyApiFallback: true,
         lazy: false,
         watchOptions: {
             aggregateTimeout: 300,
