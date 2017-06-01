@@ -33,7 +33,7 @@ module.exports = {
                             }
                         ]
                     ],
-                    plugins: ['transform-runtime']
+                    plugins: ['transform-runtime',["import", { "libraryName": "antd", "style": "css" }]]
                 }
             }, {
                 test: /\.jsx$/,

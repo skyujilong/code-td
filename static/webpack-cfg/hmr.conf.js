@@ -35,7 +35,7 @@ module.exports = {
                         ],
                         ['react']
                     ],
-                    plugins: ['transform-runtime', 'react-hot-loader/babel']
+                    plugins: ['transform-runtime', 'react-hot-loader/babel',["import", { "libraryName": "antd", "style": 'css' }]]
                 }
             }, {
                 // css资源
