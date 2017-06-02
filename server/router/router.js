@@ -68,6 +68,7 @@ router.get('/analysisChengDu', function*(next) {
         area = _.merge(area, {
             cityId: objectId,
             name: _.trim($(this).find('.li-info h3 a').text()),
+            cityArea: '双流',
             addr: _.trim($(this).find('address').text()),
             priceInfo: [{
                 price: $(this).find('.li-side').find('strong').text(),
@@ -77,12 +78,15 @@ router.get('/analysisChengDu', function*(next) {
         });
         list.push(area);
     });
-    // yield Promise.all(list);
+    
     for (let area of list) {
         let info = yield db.collection('area')
             .findOneAndUpdate({
                 name: area.name
             }, {
+                $set : {
+                    'cityArea':'双流'
+                },
                 $push: {
                     priceInfo: {
                         $each: area.priceInfo
