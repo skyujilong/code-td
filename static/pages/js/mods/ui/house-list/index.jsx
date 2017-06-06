@@ -3,9 +3,10 @@ import React from 'react';
 import {Layout, Menu, Icon} from 'antd';
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
-
+import {connect} from 'react-redux';
 class HouseIndex extends React.Component {
     render() {
+        const {value,onIncreaseClick} = this.props;
         return (
             <Layout>
                 <Sider width={200} style={{background:'#fff'}}>
@@ -20,7 +21,10 @@ class HouseIndex extends React.Component {
                             </SubMenu>
                         </Menu>
                 </Sider>
-                <Content style={{'marginLeft':'20px'}}>hello world</Content>
+                <Content style={{'marginLeft':'20px'}}>
+                    <span>{value}</span>
+                    <button onClick={(e)=>{onIncreaseClick(e)}}>点击我自增长</button>
+                </Content>
             </Layout>
         );
     }
@@ -29,4 +33,18 @@ class HouseIndex extends React.Component {
     }
 }
 
-export default HouseIndex;
+function mapStateToProps(state){
+    return {
+        value : state.count
+    }
+}
+
+const increaseAction = { type: 'increase' };
+
+function mapDispatchToProps(dispatch){
+    return {
+        onIncreaseClick: () => dispatch(increaseAction)
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(HouseIndex);
