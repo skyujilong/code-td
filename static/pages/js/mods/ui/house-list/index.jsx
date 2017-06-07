@@ -6,6 +6,7 @@ const {Header, Content, Sider} = Layout;
 import {connect} from 'react-redux';
 class HouseIndex extends React.Component {
     render() {
+        //方法均是 从props中取出来的
         const {value,onIncreaseClick} = this.props;
         return (
             <Layout>
@@ -33,6 +34,7 @@ class HouseIndex extends React.Component {
     }
 }
 
+// 映射 state to prop 上
 function mapStateToProps(state){
     return {
         value : state.count
@@ -40,11 +42,11 @@ function mapStateToProps(state){
 }
 
 const increaseAction = { type: 'increase' };
-
+//映射 ，那些方法会触发 dispatch 方法
 function mapDispatchToProps(dispatch){
     return {
         onIncreaseClick: () => dispatch(increaseAction)
     }
 }
-
+//绑定方法，将两个映射方法绑定到 ui上面，会生成一个 contont ui
 export default connect(mapStateToProps,mapDispatchToProps)(HouseIndex);

@@ -1,2 +1,2 @@
 'use strict';
-import '../mods/ui/hmr-test'
+import '../mods/ui/hmr-test';

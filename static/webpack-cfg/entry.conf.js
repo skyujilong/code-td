@@ -16,7 +16,7 @@ module.exports = {
         let map = {};
         entryFiles.forEach((filePath) => {
             let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
-            map[filename] = filePath
+            map[filename] = ['babel-polyfill', filePath];
         });
         return map;
     })()

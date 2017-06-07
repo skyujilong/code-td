@@ -31,9 +31,23 @@ module.exports = {
                             'es2015', {
                                 'module': false
                             }
-                        ]
+                        ],
+                        ['stage-0']
                     ],
-                    plugins: ['transform-runtime',["import", { "libraryName": "antd", "style": "css" }]]
+                    plugins: [
+                        [
+                            'transform-runtime', {
+                                'regenerator': false
+                            }
+                        ],
+                        [
+                            "transform-regenerator", {
+                                asyncGenerators: true,
+                                generators: true,
+                                async: false
+                            }
+                        ]
+                    ]
                 }
             }, {
                 test: /\.jsx$/,
@@ -48,7 +62,26 @@ module.exports = {
                         ],
                         ['react']
                     ],
-                    plugins: ['transform-runtime']
+                    plugins: [
+                        [
+                            'transform-runtime', {
+                                'regenerator': false
+                            }
+                        ],
+                        [
+                            "transform-regenerator", {
+                                asyncGenerators: true,
+                                generators: true,
+                                async: false
+                            }
+                        ],
+                        [
+                            "import", {
+                                "libraryName": "antd",
+                                "style": "css"
+                            }
+                        ]
+                    ]
                 }
             }, {
                 // css资源

@@ -18,9 +18,23 @@ module.exports = {
                             'es2015', {
                                 'module': false
                             }
-                        ]
+                        ],
+                        ['stage-0']
                     ],
-                    plugins: ['transform-runtime']
+                    plugins: [
+                        [
+                            'transform-runtime', {
+                                'regenerator': false
+                            }
+                        ],
+                        [
+                            "transform-regenerator", {
+                                asyncGenerators: true,
+                                generators: true,
+                                async: false
+                            }
+                        ]
+                    ]
                 }
             }, {
                 test: /\.jsx$/,
@@ -33,9 +47,30 @@ module.exports = {
                                 'module': false
                             }
                         ],
+                        ['stage-0'],
                         ['react']
                     ],
-                    plugins: ['transform-runtime', 'react-hot-loader/babel',["import", { "libraryName": "antd", "style": 'css' }]]
+                    plugins: [
+                        [
+                            'transform-runtime', {
+                                'regenerator': false
+                            }
+                        ],
+                        [
+                            "transform-regenerator", {
+                                asyncGenerators: true,
+                                generators: true,
+                                async: false
+                            }
+                        ],
+                        'react-hot-loader/babel',
+                        [
+                            "import", {
+                                "libraryName": "antd",
+                                "style": 'css'
+                            }
+                        ]
+                    ]
                 }
             }, {
                 // css资源
