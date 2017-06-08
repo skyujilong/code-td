@@ -4,6 +4,7 @@ import {Layout, Menu, Icon} from 'antd';
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 import {connect} from 'react-redux';
+import '../house-chart/index.jsx';
 class HouseIndex extends React.Component {
     render() {
         //方法均是 从props中取出来的
@@ -40,7 +41,6 @@ function mapStateToProps(state){
         value : state.count
     }
 }
-
 const increaseAction = { type: 'increase' };
 //映射 ，那些方法会触发 dispatch 方法
 function mapDispatchToProps(dispatch){

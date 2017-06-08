@@ -6,6 +6,7 @@ const path = require('path');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
+    devtool: 'eval',
     module: {
         rules: [
             {

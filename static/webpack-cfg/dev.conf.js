@@ -60,16 +60,18 @@ module.exports = {
                         ['react']
                     ],
                     plugins: [
-                        'transform-runtime', {
-                            'regenerator': false
-                        }
-                    ],
-                    [
-                        "transform-regenerator", {
-                            asyncGenerators: true,
-                            generators: true,
-                            async: false
-                        }
+                        [
+                            'transform-runtime', {
+                                'regenerator': false
+                            }
+                        ],
+                        [
+                            "transform-regenerator", {
+                                asyncGenerators: true,
+                                generators: true,
+                                async: false
+                            }
+                        ]
                     ]
                 }
             }, {
