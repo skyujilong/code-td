@@ -23,7 +23,11 @@ module.exports = {
         stats: {
             colors: true
         },
-        quiet: false
+        quiet: false,
+        proxy:{
+            //启用proxy代理
+            '/api': 'http://localhost:3000'
+        }
     }
 
 };

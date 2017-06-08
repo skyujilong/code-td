@@ -16,7 +16,6 @@ module.exports = function(url, data, method) {
                 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
             },
             method: method || 'get'
-            // proxy:'http://210.38.1.130:8080'
         });
     });
 };

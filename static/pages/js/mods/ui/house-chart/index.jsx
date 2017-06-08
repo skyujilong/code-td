@@ -23,3 +23,9 @@ co(function* (){
 }).catch(function(e){
 
 });
+
+fetch('/api/test').then(function(response){
+    return response.josn();
+}).then(function(){},function(err){
+    console.log(err);
+})
