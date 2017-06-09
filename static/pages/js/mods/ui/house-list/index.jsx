@@ -4,15 +4,18 @@ import {Layout, Menu, Icon} from 'antd';
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 import {connect} from 'react-redux';
-import '../house-chart/index.jsx';
+// import '../house-chart/index.jsx';
+import Loading from '../loading/index';
+import HouseMenu from '../house-menu/index.jsx';
 class HouseIndex extends React.Component {
     render() {
         //方法均是 从props中取出来的
         const {value,onIncreaseClick} = this.props;
         return (
             <Layout>
+
                 <Sider width={200} style={{background:'#fff'}}>
-                        <Menu mode="inline" onClick={this.checkMenu} defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{height:'100%'}}>
+                        {/* <Menu mode="inline" onClick={this.checkMenu} defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{height:'100%'}}>
                             <SubMenu key="sub1" title={<span><Icon type="filter" />成都</span>}>
                                 <Menu.Item key="1">
                                     双流
@@ -21,12 +24,16 @@ class HouseIndex extends React.Component {
                                     高新区
                                 </Menu.Item>
                             </SubMenu>
-                        </Menu>
+                        </Menu> */}
+                        <HouseMenu/>
                 </Sider>
-                <Content style={{'marginLeft':'20px'}}>
-                    <span>{value}</span>
-                    <button onClick={(e)=>{onIncreaseClick(e)}}>点击我自增长</button>
-                </Content>
+                <Layout>
+                    <Content style={{'marginLeft':'20px'}}>
+                        {/* <span>{value}</span> */}
+                        {/* <button onClick={(e)=>{onIncreaseClick(e)}}>点击我自增长</button> */}
+                        <Loading/>
+                    </Content>
+                </Layout>
             </Layout>
         );
     }
@@ -38,7 +45,7 @@ class HouseIndex extends React.Component {
 // 映射 state to prop 上
 function mapStateToProps(state){
     return {
-        value : state.count
+        value : state.counter.count
     }
 }
 const increaseAction = { type: 'increase' };

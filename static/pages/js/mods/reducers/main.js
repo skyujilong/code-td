@@ -1,5 +1,11 @@
 'use strict';
-exports.counter = function(state = {
+import {combineReducers} from 'redux';
+
+import anjukeCityMenu from './anjukeCityMenu';
+
+console.log(anjukeCityMenu);
+
+function counter(state = {
     count: 0
 }, action) {
     const count = state.count;
@@ -11,4 +17,6 @@ exports.counter = function(state = {
         default:
             return state;
     }
-};
+}
+const rootReducer = combineReducers({anjukeCityMenu,counter});
+export default rootReducer;
