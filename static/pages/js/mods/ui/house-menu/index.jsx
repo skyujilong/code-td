@@ -5,40 +5,58 @@ import Loading from '../loading/index';
 import {Layout, Menu, Icon} from 'antd';
 const {Sider} = Layout;
 const {SubMenu} = Menu;
-
+import {initAnjukeMenu} from '../../action/anjukeMenuAction';
 class HouseMenu extends React.Component {
+    //在挂载发生之前立即被调用
+    componentWillMount() {
+        //init 安居客menu
+        this.props.initAnjukeMenu();
+    }
+
     render() {
         //TODO 添加初始化组件的时候 获取menu
         let {anjukeCityMenu} = this.props;
+        let menuList = anjukeCityMenu.toJS();
+        console.log(menuList);
         return (
-            <Menu mode="inline" onClick={this.checkMenu} defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{height:'100%'}}>
-                 {anjukeCityMenu.size !== 0  && anjukeCityMenu.forEach((val)=>{
-
-                 })}
-                 {anjukeCityMenu.size === 0 && <Loading/>}
+            <Menu mode="inline" onClick={this.checkMenu} defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{
+                height: '100%'
+            }}>
+                {menuList.length !== 0 && menuList.map((val, index) => {
+                    return (
+                        <SubMenu key={val._id} title={< span > <Icon type="filter"/>{val.name} < /span>}>
+                            {val.subArea.map((val) => {
+                                return (
+                                    <SubMenu key={val.name} title={val.name}>
+                                        {val.subArea.map((val)=>{
+                                            return (
+                                                <Menu.Item key={val.name}>
+                                                    {val.name}
+                                                </Menu.Item>
+                                            )
+                                        })}
+                                    </SubMenu>
+                                )
+                            })}
+                        </SubMenu>
+                    )
+                })}
+                {anjukeCityMenu.size === 0 && <Loading/>}
             </Menu>
         );
     }
-    checkMenu(e){
+    checkMenu(e) {
         console.log(e);
     }
 }
-function mapStateToProps(state){
-    return {
-        anjukeCityMenu: state.anjukeCityMenu
-    }
+function mapStateToProps(state) {
+    return {anjukeCityMenu: state.anjukeCityMenu}
 }
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return {
-        dispatchRequest: ()=>{
-            //TODO 请求
-        },
-        dispatchSuccess: ()=>{
-
-        },
-        dispatchFail: ()=>{
-
+        initAnjukeMenu: () => {
+            dispatch(initAnjukeMenu());
         }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(HouseMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(HouseMenu);

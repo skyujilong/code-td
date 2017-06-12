@@ -118,13 +118,31 @@ router.get('/api/getSubAreaByUrl/:url/', function * (next) {
  * @type {[type]}
  */
 router.get('/api/getAnjukeMenu/', function * (next) {
-    const db = yield dbHandler.getDb();
-    let menuData = yield db.collection('city').find({
-        //TODO 后边取消掉这个选择，现在其他还没有数据
-        name:'成都'
-    }).toArray();
-    db.close();
-    this.body = JSON.stringify(menuData);
+    let menuData;
+    try {
+        const db = yield dbHandler.getDb();
+        menuData = yield db.collection('city').find({
+            //TODO 后边取消掉这个选择，现在其他还没有数据
+            name: '成都'
+        }).toArray();
+        db.close();
+        this.body = JSON.stringify({
+            'state': 'success',
+            'code': 200,
+            'result': {
+                menuList: menuData
+            }
+        });
+    } catch (e) {
+        this.body = JSON.stringify({
+            'state': 'error',
+            'code': 500,
+            'result': {
+                'msg': '鬼知道发生了什么！'
+            }
+        })
+    }
+
     yield next;
 });
 
