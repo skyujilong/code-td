@@ -8,7 +8,6 @@ const Area = require('../module/area.js');
 const co = require('co');
 const getCityAndAreaTask = require('../buz/anjuke/getCityAndArea');
 
-
 router.get('/', function * (next) {
     this.body = 'hello world';
     yield next;
@@ -56,7 +55,6 @@ router.get('/analysisChengDu', function * (next) {
     let list = [];
     let db = yield dbHandler.getDb();
 
-
     // console.log($('body .li-itemmod'));
     $('body .li-itemmod').each(function() {
         let area = new Area();
@@ -103,16 +101,30 @@ router.get('/api/getSubAreaByUrl/:url/', function * (next) {
     let url = this.params.url;
     let content = yield req(url);
     let $ = cheerio.load(content[1], {decodeEntities: false});
-    let cityName = _.trim($('.city-view').text()).replace(/[^\u4e00-\u9fa5]/g,'');
+    let cityName = _.trim($('.city-view').text()).replace(/[^\u4e00-\u9fa5]/g, '');
     let urlList = [];
-    $('.elems-l').eq(0).children('a').each(function(){
+    $('.elems-l').eq(0).children('a').each(function() {
         let areaName = _.trim($(this).text());
-        if(areaName.indexOf('全部') === -1 ){
+        if (areaName.indexOf('全部') === -1) {
             urlList.push(_.trim($(this).attr('href')));
         }
     });
-    getCityAndAreaTask(cityName,urlList);
+    getCityAndAreaTask(cityName, urlList);
     this.body = JSON.stringify(urlList);
+    yield next;
+});
+/**
+ * 查询安居客菜单
+ * @type {[type]}
+ */
+router.get('/api/getAnjukeMenu/', function * (next) {
+    const db = yield dbHandler.getDb();
+    let menuData = yield db.collection('city').find({
+        //TODO 后边取消掉这个选择，现在其他还没有数据
+        name:'成都'
+    }).toArray();
+    db.close();
+    this.body = JSON.stringify(menuData);
     yield next;
 });
 
