@@ -14,12 +14,11 @@ class HouseMenu extends React.Component {
     }
 
     render() {
-        //TODO 添加初始化组件的时候 获取menu
+        //添加初始化组件的时候 获取menu
         let {anjukeCityMenu} = this.props;
         let menuList = anjukeCityMenu.toJS();
-        console.log(menuList);
         return (
-            <Menu mode="inline" onClick={this.checkMenu} defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{
+            <Menu mode="inline" onClick={this.checkMenu} defaultSelectedKeys={['创业路']} defaultOpenKeys={['593900c58ac7d6523154655a','高新']} style={{
                 height: '100%'
             }}>
                 {menuList.length !== 0 && menuList.map((val, index) => {
