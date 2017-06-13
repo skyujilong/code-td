@@ -7,7 +7,6 @@ export default function anjukeCityMenu(state = initState, action) {
         case ActionTypes.ANJUKE_CITY_MENU_REQUEST:
             return Immutable.fromJS([]);
         case ActionTypes.ANJUKE_CITY_MENU_SUCCESS:
-            console.log(state.merge(Immutable.fromJS(action.data.result.menuList)));
             return state.merge(Immutable.fromJS(action.data.result.menuList));
         case ActionTypes.ANJUKE_CITY_MENU_FAILURE:
             return Immutable.fromJS([]);

@@ -50,7 +50,7 @@ class HouseMenu extends React.Component {
     }
 }
 function mapStateToProps(state) {
-    return {anjukeCityMenu: state.anjukeCityMenu}
+    return {anjukeCityMenu: state.get('anjukeCityMenu')}
 }
 function mapDispatchToProps(dispatch) {
     return {
