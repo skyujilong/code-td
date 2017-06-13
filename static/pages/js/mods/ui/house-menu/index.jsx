@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Loading from '../loading/index';
 import {Layout, Menu, Icon} from 'antd';
+import {Link} from 'react-router-dom';
 const {Sider} = Layout;
 const {SubMenu} = Menu;
 import {initAnjukeMenu} from '../../action/anjukeMenuAction';
@@ -24,13 +25,13 @@ class HouseMenu extends React.Component {
                 {menuList.length !== 0 && menuList.map((val, index) => {
                     return (
                         <SubMenu key={val._id} title={< span > <Icon type="filter"/>{val.name} < /span>}>
-                            {val.subArea.map((val) => {
+                            {val.subArea.map((subVal) => {
                                 return (
-                                    <SubMenu key={val.name} title={val.name}>
-                                        {val.subArea.map((val)=>{
+                                    <SubMenu key={subVal.name} title={subVal.name}>
+                                        {subVal.subArea.map((subSubVal)=>{
                                             return (
-                                                <Menu.Item key={val.name}>
-                                                    {val.name}
+                                                <Menu.Item key={subSubVal.name}>
+                                                    <Link to={'/house/'+ val._id + '/' + subVal.name + '/' + subSubVal.name}>{subSubVal.name}</Link>
                                                 </Menu.Item>
                                             )
                                         })}

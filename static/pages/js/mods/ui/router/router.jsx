@@ -1,8 +1,10 @@
 'use strict';
 import React from 'react';
+
 import {BrowserRouter, Link, Route} from 'react-router-dom';
 // import {Hello} from '../wrap-container/index';
 import HouseIndex from '../house-list/index';
+import Settings from '../settings/index';
 import {Layout} from 'antd';
 import Nav from '../nav/nav';
 const {Header, Content} = Layout;
@@ -16,7 +18,8 @@ const Router = () => {
                     </Header>
                     <Layout>
                         <Route exact path="/" component={HouseIndex}></Route>
-                        {/* TODO 注册底部的渲染内容Route */}
+                        <Route path="/house/:shengId/:area1/:area2" component={HouseIndex}/>
+                        <Route path="/setting/:menuKey?" component={Settings}/>
                     </Layout>
                 </Layout>
             </BrowserRouter>

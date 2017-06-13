@@ -10,7 +10,7 @@ class Nav extends React.Component {
                     <Col span={6}><div className={'logo'}>CODE-TD</div></Col>
                     <Col span={4}><div className={'item active'}>房产</div></Col>
                     <Col span={4}><div className={'item'}>租房</div></Col>
-                    <Col span={4}><div className={'item'}>其他</div></Col>
+                    <Col span={4}><div className={'item'}>设置</div></Col>
                 </Row>
             </nav>
         );

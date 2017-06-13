@@ -110,7 +110,13 @@ router.get('/api/getSubAreaByUrl/:url/', function * (next) {
         }
     });
     getCityAndAreaTask(cityName, urlList);
-    this.body = JSON.stringify(urlList);
+    this.body = JSON.stringify({
+        'state':'success',
+        'code':'200',
+        'result':{
+            'urlList':urlList
+        }
+    });
     yield next;
 });
 /**
