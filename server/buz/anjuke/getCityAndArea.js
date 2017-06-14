@@ -1,8 +1,6 @@
 'use strict';
 const co = require('co');
 const dbHandler = require('../../db/db');
-// const thunkify = require('thunkify');
-// const delay = thunkify(setTimeout);
 const req = require('../../util/req.js');
 const cheerio = require('cheerio');
 const _ = require('lodash');
