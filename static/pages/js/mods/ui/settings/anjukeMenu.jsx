@@ -5,6 +5,10 @@ const FormItem = Form.Item;
 
 import {sendMenuData, changeUrlAction} from '../../action/settingsAction';
 
+function hasErrors(fieldsError) {
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
+}
+
 class AnjukeMenuSettings extends React.Component {
     componentDidUpdate(){
         let {reqState} = this.props;
@@ -16,17 +20,27 @@ class AnjukeMenuSettings extends React.Component {
     }
     render() {
         let {url, reqState, changeUrl, save} = this.props;
+        const {getFieldDecorator,getFieldsError} = this.props.form;
         return (
             <Form>
                 <FormItem>
-                    <Input style={{
-                        width: 300
-                    }} addonBefore="WEB地址" placeholder="请输入地址" onChange={(e) => {
-                        changeUrl(e.target.value);
-                    }}/>
+                    {getFieldDecorator('webUrl',{
+                        rules:[{
+                            required:true,message:'input your website url!'
+                        },{
+                            type:'url',message:'input web url!'
+                        }]
+                    })(
+                        <Input style={{
+                            width: 300
+                        }} addonBefore="WEB地址" placeholder="请输入地址" onChange={(e) => {
+                            changeUrl(e.target.value);
+                        }}/>
+                    )}
+
                 </FormItem>
                 <FormItem>
-                    <Button disabled={reqState === '0'}  onClick={(e) => {
+                    <Button htmlType="submit" disabled={reqState === '0' || hasErrors(getFieldsError()) || !url}  onClick={(e) => {
                         this.handlerSubmit(e);
                     }} type="primary" size="large">submit</Button>
                 </FormItem>
@@ -34,6 +48,7 @@ class AnjukeMenuSettings extends React.Component {
         )
     }
     handlerSubmit(e) {
+        e.preventDefault();
         let {save, url} = this.props;
         save(url);
     }
@@ -51,5 +66,6 @@ function mapDispatchToProps(dispatch) {
         }
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(AnjukeMenuSettings);
+//通过这种方式 又扩展了一下 方法
+//Form.create()(AnjukeMenuSettings)
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(AnjukeMenuSettings));
