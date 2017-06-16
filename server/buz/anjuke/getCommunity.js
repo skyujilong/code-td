@@ -137,10 +137,9 @@ function getQueue(infos) {
     });
     return list;
 }
-getCommunity();
 /**
 * 直接返回
 * @param  {[type]}    list [description]
 * @return {function}      [description]
 */
-exports.getCommunity = getCommunity;
+module.exports = getCommunity;
