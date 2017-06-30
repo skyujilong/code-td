@@ -20,4 +20,5 @@ app.listen(3000, () => {
     task('安居客房价获取',function(){
         getCommunity();
     },'18:00',24*60*60*1000);
+    // getCommunity();
 });

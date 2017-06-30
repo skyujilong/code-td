@@ -137,9 +137,5 @@ function getQueue(infos) {
     });
     return list;
 }
-/**
-* 直接返回
-* @param  {[type]}    list [description]
-* @return {function}      [description]
-*/
+
 module.exports = getCommunity;

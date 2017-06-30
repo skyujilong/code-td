@@ -15,8 +15,8 @@
         "get",
         "data"
     ],
-    "author": "YJL",
-    "license": "ISC",
+    "author": "jilong5",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/skyujilong/code-td/issues"
     },

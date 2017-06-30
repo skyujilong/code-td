@@ -5,7 +5,7 @@ module.exports = {
     getDb: function() {
         return co(function*() {
             let db = yield MongoClient.connect('mongodb://localhost:27017/jilong5', {
-                poolSize: 5
+                poolSize: 20
             });
 
             yield db.authenticate('jilong5', '123456');
