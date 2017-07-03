@@ -7,6 +7,8 @@ const dbHandler = require('../db/db.js');
 const Area = require('../module/area.js');
 const co = require('co');
 const getCityAndAreaTask = require('../buz/anjuke/getCityAndArea');
+require('./house-router')(router);
+
 
 router.get('/', function * (next) {
     this.body = 'hello world';
