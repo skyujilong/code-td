@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import ActionTypes from '../action/actionTyps';
 let initState = Immutable.fromJS([]);
 export default function anjukeCityMenu(state = initState, action) {
+    
     switch (action.type) {
         case ActionTypes.ANJUKE_CITY_MENU_REQUEST:
             return Immutable.fromJS([]);

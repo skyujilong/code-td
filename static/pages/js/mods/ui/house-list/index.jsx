@@ -4,7 +4,7 @@ import {Layout, Menu, Icon} from 'antd';
 const {SubMenu} = Menu;
 const {Content, Sider} = Layout;
 import {connect} from 'react-redux';
-// import '../house-chart/index.jsx';
+import HouseChart from '../house-chart/index.jsx';
 import Loading from '../loading/index';
 import HouseMenu from '../house-menu/index.jsx';
 class HouseIndex extends React.Component {
@@ -21,7 +21,7 @@ class HouseIndex extends React.Component {
                 </Sider>
                 <Layout>
                     <Content style={{'marginLeft':'20px'}}>
-                        <Loading/>
+                        <HouseChart routeMatch={match}/>
                     </Content>
                 </Layout>
             </Layout>

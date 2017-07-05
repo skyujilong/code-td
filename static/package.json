@@ -5,7 +5,7 @@
   "author": "jilong5",
   "scripts": {
     "dev-build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config ./webpack.config.js --host test.sina.com.cn --port 80 --env.NODE_ENV=dev-server",
-    "dev-hmr-build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config ./webpack.config.js --host test.sina.com.cn --port 80 --hot --env.NODE_ENV=dev-hmr",
+    "dev-hmr-build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config ./webpack.config.js --host test.sina.com.cn --port 80 --hot --progress --env.NODE_ENV=dev-hmr",
     "build": "node ./node_modules/webpack/bin/webpack.js --config ./webpack.config.js --color --progress --env.NODE_ENV=prod",
     "dev-ie-build": "node ./node_modules/webpack/bin/webpack.js --config ./webpack.config.js --color --progress --watch -d --env.NODE_ENV=dev-watch",
     "dev-ie-server": "node ./node_modules/http-server/bin/http-server ./test -p 80"
@@ -52,7 +52,8 @@
     "tmodjs-loader": "^1.0.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.4.1",
-    "webpack-spritesmith": "^0.3.0"
+    "webpack-spritesmith": "^0.3.0",
+    "echarts":"^3.6.2"
   },
   "devDependencies": {
     "babel-loader": "^7.0.0",

@@ -11,7 +11,11 @@ const ActionTypes = (()=>{
         'ANJUKE_CITY_MENU_UPDATE_SUCCESS',
         'ANJUKE_CITY_MENU_UPDATE_FAILUTRE',
         'ANJUKE_CITY_MENU_UPDATE_REST',
-        'ANJUKE_CITY_MENU_UPDATE_CHANGE'
+        'ANJUKE_CITY_MENU_UPDATE_CHANGE',
+        //安居客 城市相关报表
+        'ANJUKE_CITY_PRICE_REQUEST',
+        'ANJUKE_CITY_PRICE_SUCCESS',
+        'ANJUKE_CITY_PRICE_FAILUTRE'
     ];
     let map = {};
     for(let val of typeList){

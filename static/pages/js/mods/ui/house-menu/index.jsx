@@ -46,6 +46,7 @@ class HouseMenu extends React.Component {
         );
     }
     checkMenu(e) {
+        console.log('点击菜单');
         console.log(e);
     }
 }
