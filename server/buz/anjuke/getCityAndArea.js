@@ -46,6 +46,10 @@ function taskInitCityArea(cityName, list) {
                 }
             });
 
+            if(areaInfo.subArea.length === 0){
+                continue;
+            }
+
             let db = yield dbHandler.getDb();
             let dbInfo = yield db.collection('city').findOneAndUpdate({
                 'name': cityName
