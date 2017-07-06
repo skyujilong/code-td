@@ -131,6 +131,26 @@ module.exports = {
 
                 return module.context && module.context.indexOf("node_modules") !== -1;
             }
+        }),
+        new webpack.DllReferencePlugin({
+            context:path.resolve(__dirname,'..'),
+            manifest:require('../dll/chartLib-manifest.json')
+        }),
+        new webpack.DllReferencePlugin({
+            context:path.resolve(__dirname,'..'),
+            manifest:require('../dll/reactLib-manifest.json')
+        }),
+        new webpack.DllReferencePlugin({
+            context:path.resolve(__dirname,'..'),
+            manifest:require('../dll/reduxLib-manifest.json')
+        }),
+        // new webpack.DllReferencePlugin({
+        //     context:path.resolve(__dirname,'..'),
+        //     manifest:require('../dll/uiLib-manifest.json')
+        // }),
+        new webpack.DllReferencePlugin({
+            context:path.resolve(__dirname,'..'),
+            manifest:require('../dll/storeLib-manifest.json')
         })
     ]
 };

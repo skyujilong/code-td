@@ -11,6 +11,7 @@ const getCommunity = require('./buz/anjuke/getCommunity');
 //中间件配置位置
 app.use(logger());
 app.use(serve(path.resolve(__dirname ,'..','static','test')));
+app.use(serve(path.resolve(__dirname ,'..','static','dll')));
 app.use(router.routes());
 app.use(router.allowedMethods());
 
