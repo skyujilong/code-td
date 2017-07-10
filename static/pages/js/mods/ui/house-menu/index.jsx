@@ -13,16 +13,14 @@ class HouseMenu extends React.Component {
         //init 安居客menu
         this.props.initAnjukeMenu();
     }
-
     render() {
         //添加初始化组件的时候 获取menu
         let {anjukeCityMenu,anjukeCityMenuSelectState} = this.props;
         let selectInfo = anjukeCityMenuSelectState.toJS();
+        console.log('安居客菜单render:%o', selectInfo);
         let menuList = anjukeCityMenu.toJS();
         return (
-            <Menu mode="inline" onClick={(e) => {
-                this.checkMenu(e);
-            }} defaultSelectedKeys={[selectInfo.subSubAreaName]} defaultOpenKeys={[selectInfo.cityId,selectInfo.subAreaName]} style={{
+            <Menu mode="inline" defaultSelectedKeys={[selectInfo.subSubAreaName]} defaultOpenKeys={[selectInfo.cityId,selectInfo.subAreaName]} style={{
                 height: '100%'
             }}>
                 {menuList.length !== 0 && menuList.map((val, index) => {

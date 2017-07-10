@@ -18,7 +18,7 @@ const Router = () => {
                     </Header>
                     <Layout>
                         <Route exact path="/" component={HouseIndex}></Route>
-                        <Route path="/house/:shengId/:area1/:area2" component={HouseIndex}/>
+                        <Route path="/house/:cityId/:subAreaName/:subSubAreaName" component={HouseIndex}/>
                         <Route path="/setting/:menuKey?" component={Settings}/>
                     </Layout>
                 </Layout>

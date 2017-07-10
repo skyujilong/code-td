@@ -7,21 +7,32 @@ import {connect} from 'react-redux';
 import HouseChart from '../house-chart/index.jsx';
 import Loading from '../loading/index';
 import HouseMenu from '../house-menu/index.jsx';
+import {changeMenuSelectState} from '../../action/anjukeMenuAction';
+
 class HouseIndex extends React.Component {
     componentWillMount(){
-        console.log('houseIndex init...........');
-        console.log(this.props.match);
+        let {path,params} = this.props.match;
+        if(path.indexOf('/house') === 0){
+            let {cityId,subAreaName,subSubAreaName} = params;
+            this.dispatchMenuSelectChange(cityId,subAreaName,subSubAreaName);
+        }
     }
-    componentWillReceiveProps(){
-
+    componentWillReceiveProps(nextProps){
+        let {path,params} = nextProps.match;
+        if(path.indexOf('/house') === 0 && this.props.match.url !== nextProps.match.url){
+            let {cityId,subAreaName,subSubAreaName} = params;
+            this.dispatchMenuSelectChange(cityId,subAreaName,subSubAreaName);
+        }
+    }
+    dispatchMenuSelectChange(cityId,subAreaName,subSubAreaName){
+        let {houseMenuChange} = this.props;
+        houseMenuChange(cityId,subAreaName,subSubAreaName);
     }
     render() {
         //通过 this.props中的match对象
         //接受react-router中传递过来的数据
         let {match} = this.props;
         let {anjukeCityMenuSelectState} = this.props;
-
-        console.log(anjukeCityMenuSelectState.toJS());
         //方法均是 从props中取出来的
         return (
             <Layout>
@@ -49,7 +60,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return {
         houseMenuChange: (...rest) => {
-            // dispatch()
+            dispatch(changeMenuSelectState(...rest));
         }
     }
 }
