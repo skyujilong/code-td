@@ -17,7 +17,7 @@ class HouseMenu extends React.Component {
         //添加初始化组件的时候 获取menu
         let {anjukeCityMenu,anjukeCityMenuSelectState} = this.props;
         let selectInfo = anjukeCityMenuSelectState.toJS();
-        console.log('安居客菜单render:%o', selectInfo);
+        // console.log('安居客菜单render:%s', JSON.stringify(selectInfo));
         let menuList = anjukeCityMenu.toJS();
         return (
             <Menu mode="inline" defaultSelectedKeys={[selectInfo.subSubAreaName]} defaultOpenKeys={[selectInfo.cityId,selectInfo.subAreaName]} style={{
