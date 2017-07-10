@@ -35,16 +35,15 @@ class HouseChart extends React.Component {
     }
     //组件在首次初始化 render之前 调用的
     componentWillMount(){
-        // console.log(match);
-        console.log(this.props.routeMatch);
         window.addEventListener('scroll',this.delayFn.bind(this),false);
+        let {area1,area2,shengId} = this.props.routeMatch.params;
+        this.props.initChart(shengId,area2);
     }
     //组件销毁的时候
     componentDidMount(){
         window.removeEventListener('scroll',this.delayFn.bind(this),false);
     }
     render() {
-        console.log('render..........');
         let {state,code,result} = this.props.anjukeCityChart.toJS();
         return (
             <div>

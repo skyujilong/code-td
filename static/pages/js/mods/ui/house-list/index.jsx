@@ -12,7 +12,7 @@ class HouseIndex extends React.Component {
         //通过 this.props中的match对象
         //接受react-router中传递过来的数据
         let {match} = this.props;
-        console.log(match);
+        //TODO dispatch match
         //方法均是 从props中取出来的
         return (
             <Layout>

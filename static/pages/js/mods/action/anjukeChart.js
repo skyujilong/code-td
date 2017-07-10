@@ -22,7 +22,6 @@ function getAjkHousePrice(cityId, subSubAreaName) {
         fetch(url + '/api/getAjkAreaHouseInfo/' + cityId + '/' + subSubAreaName).then((res) => {
             return res.json();
         }).then((res) => {
-            console.log(res);
             if(res.code === 200){
                 dispatch(reqAjkHousePriceSuccess(res));
             }else{

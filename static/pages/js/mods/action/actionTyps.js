@@ -6,6 +6,7 @@ const ActionTypes = (()=>{
         'ANJUKE_CITY_MENU_REQUEST',
         'ANJUKE_CITY_MENU_SUCCESS',
         'ANJUKE_CITY_MENU_FAILURE',
+        'ANJUKE_CITY_SELECT_CHANGE',
         //安居客 城市菜单settings
         'ANJUKE_CITY_MENU_UPDATE_REQUEST',
         'ANJUKE_CITY_MENU_UPDATE_SUCCESS',

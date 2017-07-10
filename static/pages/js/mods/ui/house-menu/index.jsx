@@ -6,7 +6,7 @@ import {Layout, Menu, Icon} from 'antd';
 import {Link} from 'react-router-dom';
 const {Sider} = Layout;
 const {SubMenu} = Menu;
-import {initAnjukeMenu} from '../../action/anjukeMenuAction';
+import {initAnjukeMenu,changeMenuSelectState} from '../../action/anjukeMenuAction';
 class HouseMenu extends React.Component {
     //在挂载发生之前立即被调用
     componentWillMount() {
@@ -16,10 +16,13 @@ class HouseMenu extends React.Component {
 
     render() {
         //添加初始化组件的时候 获取menu
-        let {anjukeCityMenu} = this.props;
+        let {anjukeCityMenu,anjukeCityMenuSelectState} = this.props;
+        let selectInfo = anjukeCityMenuSelectState.toJS();
         let menuList = anjukeCityMenu.toJS();
         return (
-            <Menu mode="inline" onClick={this.checkMenu} defaultSelectedKeys={['创业路']} defaultOpenKeys={['593900c58ac7d6523154655a','高新']} style={{
+            <Menu mode="inline" onClick={(e) => {
+                this.checkMenu(e);
+            }} defaultSelectedKeys={[selectInfo.subSubAreaName]} defaultOpenKeys={[selectInfo.cityId,selectInfo.subAreaName]} style={{
                 height: '100%'
             }}>
                 {menuList.length !== 0 && menuList.map((val, index) => {
@@ -45,18 +48,27 @@ class HouseMenu extends React.Component {
             </Menu>
         );
     }
-    checkMenu(e) {
-        console.log('点击菜单');
-        console.log(e);
+    checkMenu(e){
+        console.log(this);
+        let {keyPath} = e;
+        let {updateMenuCheck} = this.props;
+        console.log(this.updateMenuCheck);
+        updateMenuCheck(keyPath[0],keyPath[1],keyPath[2]);
     }
 }
 function mapStateToProps(state) {
-    return {anjukeCityMenu: state.get('anjukeCityMenu')}
+    return {
+        anjukeCityMenu: state.get('anjukeCityMenu'),
+        anjukeCityMenuSelectState: state.get('anjukeCityMenuSelectState')
+    }
 }
 function mapDispatchToProps(dispatch) {
     return {
         initAnjukeMenu: () => {
             dispatch(initAnjukeMenu());
+        },
+        updateMenuCheck: (...rest) => {
+            dispatch(changeMenuSelectState(rest));
         }
     }
 }

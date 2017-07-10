@@ -37,3 +37,14 @@ exports.initAnjukeMenu = () => {
         });
     }
 };
+
+exports.changeMenuSelectState = (cityId,subAreaName,subSubAreaName) => {
+    return {
+        type:ActionTypes.ANJUKE_CITY_MENU_UPDATE_CHANGE,
+        data:{
+            cityId:cityId,
+            subAreaName:subAreaName,
+            subSubAreaName:subSubAreaName
+        }
+    }
+}
