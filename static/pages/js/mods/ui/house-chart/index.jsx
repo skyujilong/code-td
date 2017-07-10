@@ -9,39 +9,48 @@ import {connect} from 'react-redux';
 import {getAjkHousePrice} from '../../action/anjukeChart';
 import delay from '../../../lib/kit/util/delay';
 
-
-
+//用于删除计时器的一个锚点
+let markFn;
 
 class HouseChart extends React.Component {
     constructor(props){
         super(props);
         this.delayFn = delay(this.scrollHandler,this,100);
     }
-    //组件，在接受到props发生改变的时候调用的
     componentWillReceiveProps(nextProps){
-        // console.log(nextProps);
-        //需要进行比对，防止标题标签，没有发生改
-        let {path} = nextProps.routeMatch;
-        if(path.indexOf('/house') !== 0){
-            return;
+        if(!this.props.anjukeMenuSelectState.equals(nextProps.anjukeMenuSelectState)){
+            let {cityId,subSubAreaName} = nextProps.anjukeMenuSelectState.toJS();
+            this.props.initChart(cityId,subSubAreaName);
         }
-        let {area1,area2,shengId} = this.props.routeMatch.params;
-        let nextUrlMatchParams = nextProps.routeMatch.params;
-        if(nextUrlMatchParams.area1 === area1 && nextUrlMatchParams.area2 === area2 && nextUrlMatchParams.shengId === shengId){
-            return;
-        }
-        //派发action
-        this.props.initChart(nextUrlMatchParams.shengId,nextUrlMatchParams.area2);
     }
+    //组件，在接受到props发生改变的时候调用的
+    // componentWillReceiveProps(nextProps){
+    //     // console.log(nextProps);
+    //     //需要进行比对，防止标题标签，没有发生改
+    //     let {path} = nextProps.routeMatch;
+    //     if(path.indexOf('/house') !== 0){
+    //         return;
+    //     }
+    //     let {area1,area2,shengId} = this.props.routeMatch.params;
+    //     let nextUrlMatchParams = nextProps.routeMatch.params;
+    //     if(nextUrlMatchParams.area1 === area1 && nextUrlMatchParams.area2 === area2 && nextUrlMatchParams.shengId === shengId){
+    //         return;
+    //     }
+    //     //派发action
+    //     this.props.initChart(nextUrlMatchParams.shengId,nextUrlMatchParams.area2);
+    // }
     //组件在首次初始化 render之前 调用的
     componentWillMount(){
-        window.addEventListener('scroll',this.delayFn.bind(this),false);
-        let {area1,area2,shengId} = this.props.routeMatch.params;
-        this.props.initChart(shengId,area2);
+        markFn = this.delayFn.bind(this);
+        window.addEventListener('scroll',markFn,false);
+        let {anjukeMenuSelectState} = this.props;
+        let {cityId,subSubAreaName} = anjukeMenuSelectState.toJS();
+        this.props.initChart(cityId,subSubAreaName);
     }
     //组件销毁的时候
-    componentDidMount(){
-        window.removeEventListener('scroll',this.delayFn.bind(this),false);
+    componentWillUnmount(){
+        console.log('销毁组件');
+        window.removeEventListener('scroll',markFn);
     }
     render() {
         let {state,code,result} = this.props.anjukeCityChart.toJS();
@@ -144,7 +153,8 @@ class HouseChart extends React.Component {
 
 function mapStateToProps(state){
     return {
-        anjukeCityChart: state.get('anjukeCityChart')
+        anjukeCityChart: state.get('anjukeCityChart'),
+        anjukeMenuSelectState: state.get('anjukeCityMenuSelectState')
     };
 }
 function mapDispatchToProps(dispatch){

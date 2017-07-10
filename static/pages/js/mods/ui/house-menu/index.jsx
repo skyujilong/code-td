@@ -49,10 +49,9 @@ class HouseMenu extends React.Component {
         );
     }
     checkMenu(e){
-        console.log(this);
         let {keyPath} = e;
         let {updateMenuCheck} = this.props;
-        console.log(this.updateMenuCheck);
+        keyPath = keyPath.reverse();
         updateMenuCheck(keyPath[0],keyPath[1],keyPath[2]);
     }
 }
@@ -68,7 +67,7 @@ function mapDispatchToProps(dispatch) {
             dispatch(initAnjukeMenu());
         },
         updateMenuCheck: (...rest) => {
-            dispatch(changeMenuSelectState(rest));
+            dispatch(changeMenuSelectState(...rest));
         }
     }
 }
